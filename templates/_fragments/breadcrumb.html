@@ -1,0 +1,168 @@
+{% load static %}
+<header id="header" class="site-header header-scrolled position-fixed text-black bg-light">
+    <nav id="header-nav" class="navbar navbar-expand-lg px-3 mb-3">
+        <div class="container-fluid">
+            <button class="navbar-toggler d-flex d-lg-none order-3 p-2" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <svg class="navbar-icon">
+                    <use xlink:href="#navbar-icon"></use>
+                </svg>
+            </button>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="bdNavbar" aria-labelledby="bdNavbarOffcanvasLabel">
+                <div class="offcanvas-header px-4 pb-0">
+                    <a class="navbar-brand" href="index.html">
+                        <img src="{% static 'images/main-logo.png' %}" class="logo">
+                    </a>
+                    <button type="button" class="btn-close btn-close-black" data-bs-dismiss="offcanvas"
+                        aria-label="Close" data-bs-target="#bdNavbar"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul id="navbar"
+                        class="navbar-nav text-uppercase justify-content-center align-items-center flex-grow-1 pe-3">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link me-4 dropdown-toggle link-dark" data-bs-toggle="dropdown" href="#"
+                                role="button" aria-expanded="false">Filters</a>
+                            <ul class="dropdown-menu px-3 py-2">
+                                <li>
+                                    <form method="GET" id="filterForm">
+                                        <div class="aside categories">
+                                            <h6 class="aside-title mb-2">Category</h6>
+                                            <div class="checkbox-filter">
+                                                {% for c in categories %}
+                                                <div class="input-checkbox">
+                                                    <input type="radio" id="category-{{ c.id }}" name="category" value="{{ c.id }}"
+                                                        {% if selected_category_id|stringformat:"s" == c.id|stringformat:"s" %}checked{% endif %}>
+                                                    <label for="category-{{ c.id }}" style="font-size: 1em; padding-left: 5px;">
+                                                        <span></span>
+                                                        {{ c.name }}
+                                                        <small>(0)</small>
+                                                    </label>
+                                                </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                        <div class="aside producers">
+                                            <h6 class="aside-title mb-2">Producer</h6>
+                                            <div class="checkbox-filter">
+                                                {% for p in producers %}
+                                                <div class="input-checkbox">
+                                                    <input type="radio" id="producer-{{ p.id }}" name="producer" value="{{ p.id }}"
+                                                        {% if selected_producer_id|stringformat:"s" == p.id|stringformat:"s" %}checked{% endif %}>
+                                                    <label for="producer-{{ p.id }}">
+                                                        <span></span>
+                                                        {{ p.name }}
+                                                    </label>
+                                                </div>
+                                                {% endfor %}
+                                            </div>      
+                                        </div>
+                                        <h6 class="aside-title mb-2">Price</h6>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <input id="price-min" name="price_min" type="number" class="form-control form-control-sm" style="width: 70px;">
+                                            <span class="mx-1">-</span>
+                                            <input id="price-max" name="price_max" type="number" class="form-control form-control-sm" style="width: 70px;">
+                                        </div>
+                                        <div class="d-flex gap-2">
+                                            <button type="submit" class="nav-link" style="text-decoration: underline;">
+                                                APPLY
+                                            </button>
+                                            <a href="/catalog" class="nav-link" style="text-decoration: underline;">
+                                                RESET
+                                            </a>
+                                        </div>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link me-4 dropdown-toggle link-dark" href="#" id="sortingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                SORTING
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="sortingDropdown">
+                                <li>
+                                    <a class="dropdown-item{% if request.GET.sort == '0' or not request.GET.sort %} active{% endif %}" href="?{% if request.GET %}{{ request.GET.urlencode|cut:'sort='|cut:'&' }}&{% endif %}sort=0">
+                                        By popularity
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item{% if request.GET.sort == '1' %} active{% endif %}" href="?{% if request.GET %}{{ request.GET.urlencode|cut:'sort='|cut:'&' }}&{% endif %}sort=1">
+                                        Alphabetically
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item{% if request.GET.sort == '2' %} active{% endif %}" href="?{% if request.GET %}{{ request.GET.urlencode|cut:'sort='|cut:'&' }}&{% endif %}sort=2">
+                                        By price: low to high
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link me-4 dropdown-toggle link-dark" href="#" id="paginationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                PAGINATION
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="paginationDropdown">
+                                <li>
+                                    <a class="dropdown-item{% if request.GET.page_size == "10" or not request.GET.page_size %} active{% endif %}"
+                                    href="?{% if request.GET %}{{ request.GET.urlencode|cut:'page_size='|cut:'&' }}&{% endif %}page_size=10">
+                                        10
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item{% if request.GET.page_size == "20" %} active{% endif %}"
+                                    href="?{% if request.GET %}{{ request.GET.urlencode|cut:'page_size='|cut:'&' }}&{% endif %}page_size=20">
+                                        20
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item{% if request.GET.page_size == "30" %} active{% endif %}"
+                                    href="?{% if request.GET %}{{ request.GET.urlencode|cut:'page_size='|cut:'&' }}&{% endif %}page_size=30">
+                                        30
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        
+                        <!-- <li class="nav-item">
+                            <a type="submit" class="nav-link" style="text-decoration: underline;">
+                                APPLY
+                            </a>
+                        </li> -->
+                        <!-- <li class="nav-item">
+                            <a href="/catalog" class="nav-link" style="text-decoration: underline;">
+                                RESET
+                            </a>
+                        </li> -->
+                        <!-- <li class="nav-item">
+                            <div class="user-items ps-5">
+                                <ul class="d-flex justify-content-end list-unstyled">
+                                    <li class="search-item pe-3">
+                                        <a href="#" class="search-button">
+                                            <svg class="search">
+                                                <use xlink:href="#search"></use>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                    <li class="pe-3">
+                                        <a href="#">
+                                            <svg class="user">
+                                                <use xlink:href="#user"></use>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="cart.html">
+                                            <svg class="cart">
+                                                <use xlink:href="#cart"></use>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li> -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
