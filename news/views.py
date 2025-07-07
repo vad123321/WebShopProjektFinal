@@ -8,7 +8,7 @@ def index(request):
     all_categories = NewsCategory.objects.all()
 
     return render(request, 'news/index.html', context={
-        'title': 'Новини',
+        'title': 'News',
         'page': 'index',
         'app': 'news',
         'news': all_news,
