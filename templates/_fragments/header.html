@@ -47,6 +47,13 @@
                         <li class="nav-item">
                             <div class="user-items ps-5">
                                 <ul class="d-flex justify-content-end list-unstyled">
+                                    <li class="pe-3 d-flex align-items-center">
+                                        {% if not user.is_authenticated %}
+                                            <a href="#"><i class="fa fa-user-o"></i> ГІСТЬ</a>
+                                        {% else %}
+                                            <a href="#"><i class="fa fa-user-o"></i> {{ user.username }}</a>
+                                        {% endif %}
+                                    </li>
                                     <li class="search-item pe-3">
                                         <a href="#" class="search-button">
                                             <svg class="search">
@@ -69,6 +76,7 @@
                                         </a>
                                     </li>
                                 </ul>
+                                <input type="hidden" id="user-id" value="{{ user.id }}">       
                             </div>
                         </li>
                     </ul>
