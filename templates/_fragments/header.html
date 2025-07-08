@@ -44,6 +44,13 @@
                         <li class="nav-item">
                             <a class="nav-link me-4" href="/news">News</a>
                         </li>
+                        <!-- <li class="nav-item">
+                            {% if not user.is_authenticated %}
+                                <a class="pe-3 d-flex align-items-center" href="#"><i class="fa fa-user-o"></i> ГІСТЬ</a>
+                            {% else %}
+                                <a class="pe-3 d-flex align-items-center" href="#"><i class="fa fa-user-o"></i> {{ user.username }}</a>
+                            {% endif %}
+                        </li> -->
                         <li class="nav-item">
                             <div class="user-items ps-5">
                                 <ul class="d-flex justify-content-end list-unstyled">
@@ -68,15 +75,61 @@
                                             </svg>
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="cart.html">
+                                    <!-- <li class="nav-item dropdown">
+                                        <a class="nav-link position-relative d-inline-block dropdown-toggle" href="#" id="cartDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <svg class="cart">
+                                                <use xlink:href="#cart"></use>
+                                            </svg>
+                                            <span class="ms-1">Cart</span>
+                                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.7rem;">
+                                                {{ cart_count|default:0 }}
+                                            </span>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="cartDropdown" style="min-width: 250px;">
+                                            <div class="cart-summary mb-2">
+                                                <h6 id="_count">Items in cart: {{ cart_count|default:0 }}</h6>
+                                                <h6 id="_amount">Total: {{ cart_total|default:"0.00" }} $</h6>
+                                            </div>
+                                            <div class="cart-btns d-flex justify-content-between">
+                                                <a href="/orders" class="btn btn-sm btn-outline-primary">View</a>
+                                                <a href="#" class="btn btn-sm btn-primary">Checkout <i class="fa fa-arrow-circle-right"></i></a>
+                                            </div>
+                                        </ul>
+                                    </li> -->
+                                    <!-- <li>
+                                        <a href="/orders">
                                             <svg class="cart">
                                                 <use xlink:href="#cart"></use>
                                             </svg>
                                         </a>
-                                    </li>
+                                    </li> -->
                                 </ul>
                                 <input type="hidden" id="user-id" value="{{ user.id }}">       
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <div class="user-items ps-5">
+                                <ul class="d-flex justify-content-end list-unstyled">
+                                    <a class="nav-link position-relative d-inline-block dropdown-toggle" href="#" id="cartDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <svg class="cart">
+                                            <use xlink:href="#cart"></use>
+                                        </svg>
+                                        <span class="ms-1">Cart</span>
+                                        <span id="count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.7rem;">
+                                            0
+                                        </span>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="cartDropdown" style="min-width: 250px;">
+                                        <div class="cart-summary mb-2">
+                                            <h6 id="_count">Items in cart: 0</h6>
+                                            <h6 id="_amount">Total: $</h6>
+                                        </div>
+                                        <div class="cart-btns d-flex justify-content-between">
+                                            <a href="/orders" class="btn btn-sm btn-outline-primary">View</a>
+                                            <a href="#" class="btn btn-sm btn-primary">Checkout <i class="fa fa-arrow-circle-right"></i></a>
+                                        </div>
+                                    </ul>
+                                </ul>
                             </div>
                         </li>
                     </ul>
