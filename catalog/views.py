@@ -8,6 +8,7 @@ def index(request):
     categories = Category.objects.all()
     producers = Producer.objects.all()
     products = Product.objects.all()
+    
 
     # -> 2
     selected_category_id = request.GET.get('category')

@@ -1,10 +1,16 @@
 from django.shortcuts import render
+from catalog.models import Product
 
 def index(request):
+    mobile_products = Product.objects.filter(category__id=2)[:4]
+    smart_watches = Product.objects.filter(category__id=3)[:4]
+
     return render(request, 'home/index.html', context={
         'title': 'Index',
         'page': 'index',
         'app': 'home',
+        'mobile_products': mobile_products,
+        'smart_watches': smart_watches,
     })
 
 def about(request):

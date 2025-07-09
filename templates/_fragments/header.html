@@ -24,25 +24,25 @@
                     <ul id="navbar"
                         class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link me-4 active" href="/">Home</a>
+                            <a class="nav-link me-4{% if request.path == '/' %} active{% endif %}" href="/">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link me-4" href="/services">Services</a>
+                            <a class="nav-link me-4{% if request.path == '/services' %} active{% endif %}" href="/services">Services</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link me-4" href="/catalog">Products</a>
+                            <a class="nav-link me-4{% if request.path == '/catalog/' %} active{% endif %}" href="/catalog">Products</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link me-4" href="/contacts">Contacts</a>
+                            <a class="nav-link me-4{% if request.path == '/contacts' %} active{% endif %}" href="/contacts">Contacts</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link me-4" href="/about">About</a>
+                            <a class="nav-link me-4{% if request.path == '/about' %} active{% endif %}" href="/about">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link me-4" href="/blog">Blog</a>
+                            <a class="nav-link me-4{% if request.path == '/blog' %} active{% endif %}" href="/blog">Blog</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link me-4" href="/news">News</a>
+                            <a class="nav-link me-4{% if request.path == '/news/' %} active{% endif %}" href="/news">News</a>
                         </li>
                         <!-- <li class="nav-item">
                             {% if not user.is_authenticated %}
@@ -138,3 +138,5 @@
         </div>
     </nav>
 </header>
+<div style="padding-top: 90px;">
+</div>
