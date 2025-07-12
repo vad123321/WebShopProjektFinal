@@ -16,13 +16,28 @@ def ajax_cart(request):
     response['pid'] = pid
     response['price'] = price
 
-    Order.objects.create(
-        title=f'Order-{pid}/{uid}/{timezone.now()}',
-        user_id=uid,
-        product_id=pid,
-        amount=float(price),
-        notes='Очікує підтвердження'
-    )
+    order = Order.objects.filter(user_id=uid, product_id=pid, notes='Очікує підтвердження').first()
+    if order:
+        order.quantity += 1
+        order.save()
+    else:
+        Order.objects.create(
+            title=f'Order-{pid}/{uid}/{timezone.now()}',
+            user_id=uid,
+            product_id=pid,
+            amount=float(price),
+            notes='Очікує підтвердження',
+            quantity=1
+        )
+
+    # Order.objects.create(
+    #     title=f'Order-{pid}/{uid}/{timezone.now()}',
+    #     user_id=uid,
+    #     product_id=pid,
+    #     amount=float(price),
+    #     notes='Очікує підтвердження',
+    #     quantity=1
+    # )
 
     # 2 - Зчитуємо із бази список всіх замовлень даного користувача:
     user_orders = Order.objects.filter(user_id=uid)
@@ -38,6 +53,21 @@ def ajax_cart(request):
 
     # 5 - Відправляєм дані клієнту:
     return JsonResponse(response)
+
+
+def ajax_cart_indicate(request):
+    response = dict()
+    uid = request.GET['uid']
+    user_orders = Order.objects.filter(user_id=uid)
+    # ->
+    amount = 0
+    for order in user_orders:
+        amount += order.amount
+    # ->
+    response['amount'] = amount
+    response['count'] = len(user_orders)
+    return JsonResponse(response)
+
 
 def index(request):
     return render(request, 'orders/index.html', context={
