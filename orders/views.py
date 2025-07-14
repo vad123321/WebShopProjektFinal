@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from .models import Order
 from django.utils import timezone
+from django.views.decorators.csrf import csrf_exempt
 
 
 def ajax_cart(request):
@@ -76,3 +77,54 @@ def index(request):
         'app': 'orders',
         'user_orders': Order.objects.filter(user_id=request.user.id)
     })
+
+
+def bill(request, sel_list: str):
+    # ->
+    sel_list_str = sel_list.split(',')
+    sel_list_num = [int(x) for x in sel_list_str[:-1]]
+    total_price = int(sel_list_str[-1])
+    final_list = []
+    # ->
+    for order_id in sel_list_num:
+        order = Order.objects.get(id=order_id)
+        final_list.append({
+            'product_name': order.product.name,
+            'category_name': order.product.category.name,
+            'product_price': order.product.price,
+            'product_photo': order.product.photo
+        })
+    # ->
+    return render(request, 'orders/bill.html', context={
+        'title': 'Сторінка замовлення',
+        'page': 'bill',
+        'app': 'orders',
+        'total_price': total_price,
+        'final_list': final_list,
+        'init_list': sel_list
+    })
+
+
+def confirm(request, init_list: str):
+    if request.method == 'GET':
+        return render(request, 'orders/confirm.html', context={
+            'title': 'Підтвердження замовлення',
+            'page': 'confirm',
+            'app': 'orders',
+            'init_list': init_list,
+        })
+    elif request.method == 'POST':
+        pass
+
+
+@csrf_exempt
+def delete_order(request):
+    if request.method == 'POST':
+        order_id = request.POST.get('id')
+        try:
+            Order.objects.get(id=order_id).delete()
+            return JsonResponse({'success': True})
+        except Order.DoesNotExist:
+            return JsonResponse({'success': False})
+    return JsonResponse({'success': False})
+

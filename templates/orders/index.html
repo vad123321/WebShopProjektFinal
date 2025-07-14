@@ -23,10 +23,10 @@
 			<body>
 				{% for order in user_orders %}
 					<tr>
-						<td>{{ order.id }}</td>
+						<td class="id-cell">{{ order.id }}</td>
 						<td>{{ order.title }}</td>
 						<td>{{ order.product.name }}</td>
-						<td>{{ order.amount }}</td>
+						<td class="price-cell">{{ order.amount }}</td>
 						<td>{{ order.date }}</td>
 						<td>{{ order.notes }}</td>
 						<td>
@@ -43,8 +43,20 @@
 				{% endfor %}
 			</body>
         </table>
+		<div class="total-box py-3 text-center">
+			<h5 class="fw-bold" style="font-size: 1.1em; color: green;">
+				Загальна сума до сплати:&nbsp;
+				<span id="total" style="color: red;">0.00 usd</span>
+			</h5>
+		</div>
+		<div class="text-center mb-4">
+			<a id="bill-btn" href="/orders/bill/123" class="btn btn-primary btn-rounded">
+				Перейти до замовлення
+			</a>
+		</div>
     {% else %}
         <p>You have no orders yet.</p>
     {% endif %}
 </div>
+<script src="{% static 'js/calc_orders.js' %}"></script>
 {% endblock %}
