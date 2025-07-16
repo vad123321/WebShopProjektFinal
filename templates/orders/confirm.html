@@ -10,7 +10,7 @@
 					<!-- ------------------------------------------------------------ -->
                     <form id="form2" action="/orders/confirm/{{ init_list }}" method="post">
                         {% csrf_token %}
-                        <p style="color: purple;">
+                        <p style="color: purple; text-align: center;">
                             <label for="email">
                                 Введіть ваш E-Mail для звязку зу службою доставки:
                             </label>
@@ -18,8 +18,15 @@
                             <input type="email" name="email" id="email" class="inp" required>
                             <span id="email-error" class="error"></span>
                         </p>
-                        <p>
-
+                        <p style="text-align: center;">
+                            <label for="address">Адреса доставки:</label>
+                            <input type="text" name="address" id="address" required>
+                        </p>
+                        <p style="text-align: center;">
+                            <input type="submit" id="submit" value="Підтвердити"
+                                class="btn btn-success my-btn">
+                            <input type="reset" id="reset" value="Відмінити"
+                                class="btn btn-primary my-btn">
                         </p>
                     </form>
 					<!-- ------------------------------------------------------------ -->

@@ -1005,7 +1005,21 @@ figure.instagram-item img.insta-image {
 .shopify-cart .table th {
     width: 30%;
 }
-
+.my-btn {
+  width: 150px;
+  margin-top: 15;
+  margin-right: 5px;
+}
+.inp {
+  width: 40%;
+  padding: 5px;
+  text-align: center;
+  font: 13pt 'Consolas';
+  color: red;
+}
+label {
+  font: italic 13pt 'Trebuchet MS';
+}
 
 /* 11. Checkout Page
 --------------------------------------------------------------*/
