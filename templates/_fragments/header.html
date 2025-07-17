@@ -24,89 +24,48 @@
                     <ul id="navbar"
                         class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link me-4{% if request.path == '/' %} active{% endif %}" href="/">Home</a>
+                            <a class="nav-link {% if request.path == '/' %} active{% endif %}" href="/">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link me-4{% if request.path == '/services' %} active{% endif %}" href="/services">Services</a>
+                            <a class="nav-link {% if request.path == '/services' %} active{% endif %}" href="/services">Services</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link me-4{% if request.path == '/catalog/' %} active{% endif %}" href="/catalog">Products</a>
+                            <a class="nav-link {% if request.path == '/catalog/' %} active{% endif %}" href="/catalog">Products</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link me-4{% if request.path == '/contacts' %} active{% endif %}" href="/contacts">Contacts</a>
+                            <a class="nav-link {% if request.path == '/contacts' %} active{% endif %}" href="/contacts">Contacts</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link me-4{% if request.path == '/about' %} active{% endif %}" href="/about">About</a>
+                            <a class="nav-link {% if request.path == '/about' %} active{% endif %}" href="/about">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link me-4{% if request.path == '/blog' %} active{% endif %}" href="/blog">Blog</a>
+                            <a class="nav-link {% if request.path == '/blog' %} active{% endif %}" href="/blog">Blog</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link me-4{% if request.path == '/news/' %} active{% endif %}" href="/news">News</a>
+                            <a class="nav-link {% if request.path == '/news/' %} active{% endif %}" href="/news">News</a>
                         </li>
-                        <!-- <li class="nav-item">
+                        <div class="d-flex align-items-center gap-3">
+                            <a href="#" class="user-items ps-5 search-button">
+                                <svg class="search">
+                                    <use xlink:href="#search"></use>
+                                </svg>
+                            </a>
+                            <span>
+                                {% if user.is_authenticated %}
+                                    {{ user.username }}!
+                                {% else %}
+                                    Гість!
+                                {% endif %}
+                            </span>
                             {% if not user.is_authenticated %}
-                                <a class="pe-3 d-flex align-items-center" href="#"><i class="fa fa-user-o"></i> ГІСТЬ</a>
+                                <a href="/accounts/signin">Вхід</a>
+                                <a href="/accounts/signup">Реєстрація</a>
                             {% else %}
-                                <a class="pe-3 d-flex align-items-center" href="#"><i class="fa fa-user-o"></i> {{ user.username }}</a>
+                                <a href="/accounts/signout">Вихід</a>
+                                <a href="/accounts/profile">Профіль</a>
                             {% endif %}
-                        </li> -->
-                        <li class="nav-item">
-                            <div class="user-items ps-5">
-                                <ul class="d-flex justify-content-end list-unstyled">
-                                    <li class="pe-3 d-flex align-items-center">
-                                        {% if not user.is_authenticated %}
-                                            <a href="#"><i class="fa fa-user-o"></i> ГІСТЬ</a>
-                                        {% else %}
-                                            <a href="#"><i class="fa fa-user-o"></i> {{ user.username }}</a>
-                                        {% endif %}
-                                    </li>
-                                    <li class="search-item pe-3">
-                                        <a href="#" class="search-button">
-                                            <svg class="search">
-                                                <use xlink:href="#search"></use>
-                                            </svg>
-                                        </a>
-                                    </li>
-                                    <li class="pe-3">
-                                        <a href="#">
-                                            <svg class="user">
-                                                <use xlink:href="#user"></use>
-                                            </svg>
-                                        </a>
-                                    </li>
-                                    <!-- <li class="nav-item dropdown">
-                                        <a class="nav-link position-relative d-inline-block dropdown-toggle" href="#" id="cartDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <svg class="cart">
-                                                <use xlink:href="#cart"></use>
-                                            </svg>
-                                            <span class="ms-1">Cart</span>
-                                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.7rem;">
-                                                {{ cart_count|default:0 }}
-                                            </span>
-                                        </a>
-                                        <ul class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="cartDropdown" style="min-width: 250px;">
-                                            <div class="cart-summary mb-2">
-                                                <h6 id="_count">Items in cart: {{ cart_count|default:0 }}</h6>
-                                                <h6 id="_amount">Total: {{ cart_total|default:"0.00" }} $</h6>
-                                            </div>
-                                            <div class="cart-btns d-flex justify-content-between">
-                                                <a href="/orders" class="btn btn-sm btn-outline-primary">View</a>
-                                                <a href="#" class="btn btn-sm btn-primary">Checkout <i class="fa fa-arrow-circle-right"></i></a>
-                                            </div>
-                                        </ul>
-                                    </li> -->
-                                    <!-- <li>
-                                        <a href="/orders">
-                                            <svg class="cart">
-                                                <use xlink:href="#cart"></use>
-                                            </svg>
-                                        </a>
-                                    </li> -->
-                                </ul>
-                                <input type="hidden" id="user-id" value="{{ user.id }}">       
-                            </div>
-                        </li>
+                            <input type="hidden" id="user-id" value="{{ user.id }}"> 
+                        </div>
                         <li class="nav-item dropdown">
                             <div class="user-items ps-5">
                                 <ul class="d-flex justify-content-end list-unstyled">

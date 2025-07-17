@@ -1049,3 +1049,22 @@ label {
     fill: var(--primary-color);
 }
 
+/*
+------------------------------------------------*/
+#form1 {
+  border: 1px solid silver;
+  border-radius: 15px;
+  padding: 20px 40px;
+  width: 400px;
+  margin: auto;
+  background-color: whitesmoke;
+}
+.error {
+  color: red;
+  font-style: italic;
+}
+.my {
+  width: 120px;
+  margin-top: 15px;
+  margin-right: 5;
+}
