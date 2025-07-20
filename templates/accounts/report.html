@@ -3,19 +3,17 @@
 {% block content %}
     <div class="content-panel">
         <div class="section">
-		<!-- container -->
 			<div class="container">
-				<!-- row -->
 				<div class="row">
 					<!-- ------------------------------------------------------------ -->
-                    <h4>
-                        {{ message }}
-                    </h4>
+                    {% if color == 'red' %}
+						<h4 style="color: red;">{{ message }}</h4>
+					{% else %}
+						<h4 style="color: green;">{{ message }}</h4>
+					{% endif %}
 					<!-- ------------------------------------------------------------ -->
 				</div>
-				<!-- /row -->
 			</div>
-			<!-- /container -->
 		</div>
     </div>
 {% endblock %}

@@ -48,8 +48,8 @@ $(document).ready(() => {
                     console.log('price', result.price);
                     // ->
                     $('#count').text(result.count);
-                    $('#_count').text(`Items in cart: ${result.count} шт`);
-                    $('#_amount').text(`Cost: ${result.amount} $`);
+                    $('#_count').text(`Items in cart: ${result.count} pcs`);
+                    $('#_amount').text(`Total: ${result.amount} $`);
                 }
             });
         }

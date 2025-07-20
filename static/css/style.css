@@ -545,6 +545,32 @@ h3.cart-title {
 .search-popup .cat-list-item:last-child::after {
   display: none;
 }
+#search-suggestions {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-top: 2px;
+    padding: 8px 0;
+    max-height: 300px;
+    overflow-y: auto;
+    text-align: left;
+}
+.suggest-title {
+    font-weight: bold;
+    padding: 4px 16px 2px 16px;
+    color: #333;
+}
+.list-group-item {
+    border: none;
+    padding: 6px 16px;
+}
+.list-group-item a {
+    color: #222;
+    text-decoration: none;
+}
+.list-group-item a:hover {
+    text-decoration: underline;
+}
 
 @media only screen and (max-width: 991px) {
   .search-popup .cat-list-item,
@@ -1067,4 +1093,12 @@ label {
   width: 120px;
   margin-top: 15px;
   margin-right: 5;
+}
+#form2 {
+  border: 1px solid silver;
+  border-radius: 15px;
+  padding: 20px 40px;
+  width: 400px;
+  margin: auto;
+  background-color: whitesmoke;
 }

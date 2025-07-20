@@ -10,14 +10,14 @@
             <thead>
 				<tr>
 					<th>ID</th>
-					<th>Замовлення</th>
-					<th>Товар</th>
-					<th>Ціна</th>
-					<th>Дата</th>
-					<th>Статус</th>
-					<th>Кількість</th>
-					<th>Вибір</th>
-					<th>Видалення</th>
+					<th>Order</th>
+					<th>Product</th>
+					<th>Price</th>
+					<th>Date</th>
+					<th>Status</th>
+					<th>Quantity</th>
+					<th>Select</th>
+					<th>Delete</th>
 				</tr>
 			</thead>
 			<body>
@@ -26,7 +26,7 @@
 						<td class="id-cell">{{ order.id }}</td>
 						<td>{{ order.title }}</td>
 						<td>{{ order.product.name }}</td>
-						<td class="price-cell">{{ order.amount }}</td>
+						<td class="price-cell" data-price-per-item="{{ order.product.price }}">{{ order.amount }}</td>
 						<td>{{ order.date }}</td>
 						<td>{{ order.notes }}</td>
 						<td>
@@ -36,7 +36,7 @@
 						<td>
 							<input type="hidden" value="{{ order.id }}">
 							<button class="btn btn-sm btn-warning del-btn">
-								Видалити
+								Delete
 							</button>
 						</td>
 					</tr>
@@ -45,13 +45,13 @@
         </table>
 		<div class="total-box py-3 text-center">
 			<h5 class="fw-bold" style="font-size: 1.1em; color: green;">
-				Загальна сума до сплати:&nbsp;
+				Total amount to pay:&nbsp;
 				<span id="total" style="color: red;">0.00 usd</span>
 			</h5>
 		</div>
 		<div class="text-center mb-4">
 			<a id="bill-btn" href="/orders/bill/123" class="btn btn-primary btn-rounded">
-				Перейти до замовлення
+				Proceed to order
 			</a>
 		</div>
     {% else %}

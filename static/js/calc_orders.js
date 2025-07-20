@@ -33,7 +33,27 @@ $(document).ready(() => {
         doCalculate();
     });
 
-    // Видалення товару з кошика
+    // 3
+    $(document).on('change', '.order-qty', function() {
+        let parentRow = $(this).closest('tr');
+        let orderId = parentRow.find('input[type="hidden"]').val();
+        let quantity = $(this).val();
+
+        $.ajax({
+            url: '/orders/update_order_quantity',
+            type: 'POST',
+            data: { id: orderId, quantity: quantity },
+            headers: { 'X-CSRFToken': getCookie('csrftoken') },
+            success: function(response) {
+                if (response.success) {
+                    parentRow.find('td.price-cell').text(response.amount.toFixed(2));
+                    doCalculate();
+                }
+            }
+        });
+    });  
+
+    // 4 Видалення товару з кошика
     $('.del-btn').click(function() {
         let parentRow = $(this).closest('tr');
         let orderId = parentRow.find('input[type="hidden"]').val();

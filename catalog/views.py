@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Category, Producer, Product
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.http import JsonResponse
 
 
 def index(request):
@@ -8,7 +9,9 @@ def index(request):
     categories = Category.objects.all()
     producers = Producer.objects.all()
     products = Product.objects.all()
-    
+    search_query = request.GET.get('s')
+    if search_query:
+        products = products.filter(name__icontains=search_query)
 
     # -> 2
     selected_category_id = request.GET.get('category')
@@ -40,15 +43,19 @@ def index(request):
         'app': 'catalog',
         'categories': categories,
         'producers': producers,
-        # 'products': products,
+        'products': products,
         'products': paginated_products,
         'selected_category_id': selected_category_id,
         'selected_producer_id': selected_producer_id,
     })
 
-# def shop(request):
-#     return render(request, 'catalog/shop.html', context={
-#         'title': 'Shop',
-#         'page': 'shop',
-#         'app': 'catalog',
-#     })
+def ajax_search_products(request):
+    query = request.GET.get('q', '')
+    products = Product.objects.filter(name__icontains=query)[:5]
+    categories = Category.objects.filter(name__icontains=query)[:5]
+    results_products = [{'id': p.id, 'name': p.name} for p in products]
+    results_categories = [{'id': c.id, 'name': c.name} for c in categories]
+    return JsonResponse({
+        'products': results_products,
+        'categories': results_categories
+    })

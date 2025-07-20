@@ -10,8 +10,8 @@ $(document).ready(() =>{
         data: `uid=${userId}`,
         success: (response) => {
             $('#count').text(response.count);
-            $('#_count').text(`Товарів у кошику: ${response.count}`);
-            $('#_count').text(`Вартість: ${response.amount}`);
+            $('#_count').text(`Items in cart: ${response.count} pcs`);
+            $('#_amount').text(`Total: ${response.amount} $`);
         }
     })
 })

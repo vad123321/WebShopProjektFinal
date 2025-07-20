@@ -5,7 +5,6 @@ from django.contrib.auth import authenticate, login, logout
 
 
 def signup(request):
-    response = dict()
     if request.method == 'GET':
         return render(request, 'accounts/signup.html', context={
             'title': 'Реєстрація',
@@ -24,23 +23,22 @@ def signup(request):
 
         # 3 - Формуємо звіт:
         if user is None:
-            response['color'] = 'red'
-            response['message'] = 'Не вдалось зберегти дані користувача в базі'
+            color = 'red'
+            message = 'Не вдалось зберегти дані користувача в базі'
         else:
             user.save()
-            response['color'] = 'green'
-            response['message'] = 'Реєстрація успішно завершена!'
-
+            color = 'green'
+            message = 'Реєстрація успішно завершена!'
         return render(request, 'accounts/report.html', context={
             'title': 'Звіт про реєстрацію',
             'page': 'report',
             'app': 'accounts',
-            'response': response
+            'color': color,
+            'message': message
         }) 
 
 
 def signin(request):
-    response = dict()
     if request.method == 'GET':
         return render(request, 'accounts/signin.html', context={
             'title': 'Авторизація',
@@ -48,18 +46,36 @@ def signin(request):
             'app': 'accounts'
         })
     elif request.method == 'POST':
-        # data handling ...
+        # 1 - Отримуємо дані із форми:
+        login_x = request.POST.get('username')
+        pass1_x = request.POST.get('pass1')
 
+        # 2 - Перевіряємо чи є такий користувач в БД:
+        user = authenticate(request, username=login_x, password=pass1_x)
+
+        # 3 - Формуємо негативний звіт:
+        if user is None:
+            color = 'red'
+            message = 'Користувач не знайдений'
+        
+        # 4 - Формуємо позитивний звіт:
+        else:
+            login(request, user)
+            color = 'green'
+            message = 'Авторизація успішно!'
+
+        # 5 - Завантаження сторінки звіту:
         return render(request, 'accounts/report.html', context={
             'title': 'Звіт про авторизацію',
             'page': 'report',
             'app': 'accounts',
-            'response': response
+            'color': color,
+            'message': message
         })
 
 
 def signout(request):
-    # ...
+    logout(request)
     return render(request, 'accounts/signout.html', context={
         'title': 'Вихід',
         'page': 'signout',
@@ -78,6 +94,12 @@ def profile(request):
 
 def ajaxreg(request):
     response = dict()
-    response['message'] ='AJAX -> OK'
-    # ...
+    login_y = request.GET.get('username')
+    # ->
+    try:
+        User.objects.get(username=login_y)
+        response['message'] = 'Логін - зайнятий!'
+    except User.DoesNotExist:
+        response['message'] = 'Логін - вільний!'
+    # ->
     return JsonResponse(response)

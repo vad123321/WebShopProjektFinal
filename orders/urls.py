@@ -1,5 +1,5 @@
 from django.urls import path, re_path
-from .views import ajax_cart, ajax_cart_indicate, index, bill, confirm, delete_order
+from .views import ajax_cart, ajax_cart_indicate, index, bill, confirm, delete_order, update_order_quantity
 
 urlpatterns = [
     path('', index),
@@ -8,4 +8,5 @@ urlpatterns = [
     re_path(r'^bill/(?P<sel_list>[0-9\,]+)$', bill),
     re_path(r'^confirm/(?P<init_list>[0-9\,]+)$', confirm),
     path('delete_order', delete_order),
+    path('update_order_quantity', update_order_quantity),
 ]
