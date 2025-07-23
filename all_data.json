@@ -387,14 +387,5 @@
     "price": 75.0,
     "count": 0
   }
-},
-{
-  "model": "accounts.favorite",
-  "pk": 9,
-  "fields": {
-    "user": 1,
-    "product": 3,
-    "created_at": "2025-07-22T15:50:36.958Z"
-  }
 }
 ]
