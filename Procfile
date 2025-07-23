@@ -1,1 +1,1 @@
-web: python manage.py migrate && python manage.py loaddata products.json && gunicorn root.wsgi
+web: python manage.py migrate && gunicorn root.wsgi
