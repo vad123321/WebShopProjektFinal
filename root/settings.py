@@ -128,7 +128,7 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]  # Directory for static files
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATIC_ROOT = str(BASE_DIR / "staticfiles")
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"  # Directory for uploaded media files
@@ -146,3 +146,5 @@ EMAIL_PORT = os.environ.get('EMAIL_PORT', '2525')
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 DEFAULT_FROM_EMAIL = "webshop@example.com"
+
+LOGIN_URL = '/accounts/signin'
