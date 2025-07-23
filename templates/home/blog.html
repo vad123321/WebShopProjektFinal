@@ -1,23 +1,109 @@
 {% extends '_layouts/base.html' %}
 
 {% block content %}
-<div class="content-panel">
-    <h2>{{ title }}</h2>
-    <p>Welcome to our blog! Here you will find useful articles, news, and tips about our products and the world of online shopping.</p>
-    <ul>
-        <li>
-            <h4>How to Choose the Perfect Product</h4>
-            <p>Learn how to select the best products for your needs with our expert advice.</p>
-        </li>
-        <li>
-            <h4>Latest Store News</h4>
-            <p>Stay up to date with the latest updates, promotions, and events in our store.</p>
-        </li>
-        <li>
-            <h4>Customer Stories</h4>
-            <p>Read real stories and reviews from our satisfied customers.</p>
-        </li>
-    </ul>
-    <p>Follow our blog for more interesting updates!</p>
+{% load static %}
+<div class="content-panel py-4">
+    <h2 class="mb-4">{{ title }}</h2>
+    <p class="text-secondary mb-4">
+        Welcome to our blog! Here you will find useful articles, news, and tips about our products and the world of online shopping.
+    </p>
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body">
+                    <div class="mb-3 text-primary" style="font-size:2rem;">
+                        <i class="bi bi-lightbulb"></i>
+                    </div>
+                    <h4 class="card-title">How to Choose the Perfect Product</h4>
+                    <p class="card-text text-muted">
+                        Learn how to select the best products for your needs with our expert advice.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body">
+                    <div class="mb-3 text-success" style="font-size:2rem;">
+                        <i class="bi bi-megaphone"></i>
+                    </div>
+                    <h4 class="card-title">Latest Store News</h4>
+                    <p class="card-text text-muted">
+                        Stay up to date with the latest updates, promotions, and events in our store.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body">
+                    <div class="mb-3 text-warning" style="font-size:2rem;">
+                        <i class="bi bi-people"></i>
+                    </div>
+                    <h4 class="card-title">Customer Stories</h4>
+                    <p class="card-text text-muted">
+                        Read real stories and reviews from our satisfied customers.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p class="mt-4 text-secondary">Follow our blog for more interesting updates!</p>
 </div>
+<section id="latest-blog" class="padding-large">
+    <div class="container">
+        <div class="row">
+            <div class="post-grid d-flex flex-wrap justify-content-between">
+                <div class="col-lg-4 col-sm-12">
+                    <div class="card border-none me-3">
+                        <div class="card-image">
+                            <img src="{% static 'images/post-item1.jpg' %}" alt="" class="img-fluid">
+                        </div>
+                    </div>
+                    <div class="card-body text-uppercase">
+                        <div class="card-meta text-muted">
+                            <span class="meta-date">feb 22, 2023</span>
+                            <span class="meta-category">- Gadgets</span>
+                        </div>
+                        <h3 class="card-title">
+                            <a href="/catalog/shop/12/">PlayStation 4</a>
+                        </h3>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-12">
+                    <div class="card border-none me-3">
+                        <div class="card-image">
+                            <img src="{% static 'images/post-item2.jpg' %}" alt="" class="img-fluid">
+                        </div>
+                    </div>
+                    <div class="card-body text-uppercase">
+                        <div class="card-meta text-muted">
+                            <span class="meta-date">feb 25, 2023</span>
+                            <span class="meta-category">- Technology</span>
+                        </div>
+                        <h3 class="card-title">
+                            <a href="/catalog/shop/9/">headphone ss 5</a>
+                        </h3>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-12">
+                    <div class="card border-none me-3">
+                        <div class="card-image">
+                            <img src="{% static 'images/post-item3.jpg' %}" alt="" class="img-fluid">
+                        </div>
+                    </div>
+                    <div class="card-body text-uppercase">
+                        <div class="card-meta text-muted">
+                            <span class="meta-date">feb 22, 2023</span>
+                            <span class="meta-category">- Camera</span>
+                        </div>
+                        <h3 class="card-title">
+                            <a href="/catalog/shop/10/">SMALL CAMERA</a>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}

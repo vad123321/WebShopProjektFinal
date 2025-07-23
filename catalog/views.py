@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Category, Producer, Product
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import JsonResponse
@@ -22,8 +22,23 @@ def index(request):
         products = products.filter(category_id=selected_category_id)
     if selected_producer_id:
         products = products.filter(producer_id=selected_producer_id)
+    price_min = request.GET.get('price_min')
+    price_max = request.GET.get('price_max')
+    if price_min:
+        products = products.filter(price__gte=price_min)
+    if price_max:
+        products = products.filter(price__lte=price_max)
 
-    # -> 4 ...
+    # -> 4
+    categories_with_count = []
+    for c in categories:
+        count = Product.objects.filter(category=c).count()
+        categories_with_count.append({'id': c.id, 'name': c.name, 'count': count})
+
+    producers_with_count = []
+    for p in producers:
+        count = Product.objects.filter(producer=p).count()
+        producers_with_count.append({'id': p.id, 'name': p.name, 'count': count})
 
     # -> 5 Pagination
     page_size = request.GET.get('page_size', 10)
@@ -47,7 +62,10 @@ def index(request):
         'products': paginated_products,
         'selected_category_id': selected_category_id,
         'selected_producer_id': selected_producer_id,
+        'categories': categories_with_count,
+        'producers': producers_with_count,
     })
+
 
 def ajax_search_products(request):
     query = request.GET.get('q', '')
@@ -59,3 +77,8 @@ def ajax_search_products(request):
         'products': results_products,
         'categories': results_categories
     })
+
+
+def shop(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    return render(request, 'catalog/shop.html', {'product': product})

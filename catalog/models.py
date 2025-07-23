@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Category(models.Model):
-    # Модель категорії товару
+    # Product category model
     name = models.CharField(max_length=100, unique=True)
     # ->
     def __str__(self) -> str:
@@ -10,7 +10,7 @@ class Category(models.Model):
 
 
 class Producer(models.Model):
-    # Модель виробника товару
+    # Product producer model
     name = models.CharField(max_length=100, unique=True)
     # ->
     def __str__(self) -> str:
@@ -18,7 +18,7 @@ class Producer(models.Model):
 
 
 class Product(models.Model):
-    # Модель самого товару
+    # Model of the product itself
     name = models.CharField(max_length=100, unique=True)
     about = models.TextField(max_length=100, unique=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)

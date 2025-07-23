@@ -4,14 +4,14 @@ from catalog.models import Product
 
 
 class Order(models.Model):
-    # Модель замовлення (Інформація про товар у кошику користувача)
+    # Order model (Information about the product in the user's cart)
     title = models.CharField(max_length=100, unique=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     amount = models.IntegerField()
     quantity = models.IntegerField(default=1)
     date = models.DateTimeField(auto_now_add=True)
-    notes = models.TextField(max_length=500)
+    notes = models.TextField()
 
     # Repr:
     def __str__(self) -> str:

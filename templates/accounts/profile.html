@@ -1,17 +1,22 @@
 {% extends '_layouts/base.html' %}
 
 {% block content %}
+	<div style="padding-top: 90px;">
+	</div>
     <div class="content-panel">
         <div class="section">
-			<div class="container">
-				<div class="row">
-					<!-- ------------------------------------------------------------ -->
+            <div class="container">
+                <div class="row">
                     <h3 style="color:darkcyan; text-align: center; font-style: italic;">
                         {{ title }}
                     </h3>
-					<!-- ------------------------------------------------------------ -->
-				</div>
-			</div>
-		</div>
+                    <div class="text-center mt-4">
+                        <a href="/accounts/change_password" class="btn btn-warning">Change password</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+	<div style="padding-top: 90px;">
+	</div>
 {% endblock %}

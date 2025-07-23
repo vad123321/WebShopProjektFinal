@@ -38,7 +38,7 @@
                                                 <label for="category-{{ c.id }}" style="font-size: 1em; padding-left: 5px;">
                                                     <span></span>
                                                     {{ c.name }}
-                                                    <small>(0)</small>
+                                                    <small>({{ c.count }})</small>
                                                 </label>
                                             </div>
                                             {% endfor %}
@@ -54,6 +54,7 @@
                                                 <label for="producer-{{ p.id }}">
                                                     <span></span>
                                                     {{ p.name }}
+                                                    <small>({{ p.count }})</small>
                                                 </label>
                                             </div>
                                             {% endfor %}
@@ -159,27 +160,21 @@
                                         Add to Cart
                                     </button>
                                 </div>
-                                <a href="#" class="btn btn-medium btn-black">
-                                    add to favorites
-                                    <svg class="cart-outline">
-                                        <use xlink:href="#user"></use>
-                                    </svg>
-                                </a>
+                                <form method="post" action="/accounts/favorites">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="product_id" value="{{ product.id }}">
+                                    <button type="submit" class="btn btn-medium btn-black">
+                                        Add to favorites
+                                        <svg class="cart-outline">
+                                            <use xlink:href="#user"></use>
+                                        </svg>
+                                    </button>
+                                </form>
                             </div>
-                            <!-- <div class="cart-button d-flex flex-column gap-2">
-                                <a href="#" class="btn btn-medium btn-black add-to-cart-btn">Add to Cart<svg class="cart-outline">
-                                        <use xlink:href="#cart-outline"></use>
-                                    </svg>
-                                </a>
-                                <a href="#" class="btn btn-medium btn-black">add to favorites<svg class="cart-outline">
-                                        <use xlink:href="#user"></use>
-                                    </svg>
-                                </a>
-                            </div> -->
                         </div>
                         <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
                             <h3 class="card-title text-uppercase">
-                                <a href="#">{{ product.name }}</a>
+                                <a href="/catalog/shop/{{ product.id }}/">{{ product.name }}</a>
                             </h3>
                             <span class="item-price text-primary">${{ product.price }}0 </span>
                         </div>

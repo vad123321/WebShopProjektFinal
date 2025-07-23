@@ -1,0 +1,20 @@
+{% extends '_layouts/base.html' %}
+{% block content %}
+<div class="container py-5">
+    <h2 class="mb-4 text-center">Track Your Order</h2>
+    <p class="text-center text-secondary mb-5">
+        Enter your order number and email address to see the latest status of your shipment.
+    </p>
+    <form class="mx-auto" style="max-width:400px;">
+        <div class="mb-3">
+            <label for="orderNumber" class="form-label">Order Number</label>
+            <input type="text" class="form-control" id="orderNumber" placeholder="Enter your order number">
+        </div>
+        <div class="mb-3">
+            <label for="orderEmail" class="form-label">Email Address</label>
+            <input type="email" class="form-control" id="orderEmail" placeholder="Enter your email">
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Track Order</button>
+    </form>
+</div>
+{% endblock %}
